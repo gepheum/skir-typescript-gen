@@ -8,6 +8,7 @@ struct FullName {
   last_name: string;
 }
 
+/// Some */ comment.
 struct S {
   big_int: BigInt;
 }
