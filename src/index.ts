@@ -22,7 +22,7 @@ import {
 import { TypeSpeller } from "./type_speller.js";
 
 const Config = z.strictObject({
-  importPathExtension: z.optional(z.string().regex(/(|\.js)$/)),
+  importPathExtension: z.optional(z.string().regex(/^(|\.js)$/)),
   clientModulePath: z.optional(z.string()),
 });
 
