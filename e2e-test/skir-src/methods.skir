@@ -2,7 +2,7 @@ import JsonValue from "./enums.skir";
 import Point from "./structs.skir";
 
 /// My procedure
-method MyProcedure(Point): JsonValue;
+method MyProcedure(Point): JsonValue = 674706602;
 
 method WithExplicitNumber([Point]): JsonValue? = 3;
 
@@ -10,4 +10,4 @@ method BigInt(bool?): bool = 4;
 
 struct MyRequest {}
 struct MyResponse {}
-method MyMethod(MyRequest): MyResponse;
+method MyMethod(MyRequest): MyResponse = 78901;

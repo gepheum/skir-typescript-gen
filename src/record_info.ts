@@ -409,7 +409,7 @@ class RecordInfoCreator {
           case "string":
             return "k";
           case "int64":
-          case "uint64":
+          case "hash64":
             // BigInt is not hashable.
             return "k.toString()";
           case "timestamp":

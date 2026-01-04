@@ -124,7 +124,7 @@ export class TypeSpeller {
           case "float64":
             return TsType.NUMBER;
           case "int64":
-          case "uint64":
+          case "hash64":
             return TsType.BIGINT;
           case "timestamp":
             return TsType.TIMESTAMP;

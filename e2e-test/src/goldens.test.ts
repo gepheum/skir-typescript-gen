@@ -528,10 +528,10 @@ function evaluteTypedValue<T>(literal: TypedValue): TypedValueType<unknown> {
         value: literal.union.value,
         serializer: skir.primitiveSerializer("int64"),
       };
-    case "uint64":
+    case "hash64":
       return {
         value: literal.union.value,
-        serializer: skir.primitiveSerializer("uint64"),
+        serializer: skir.primitiveSerializer("hash64"),
       };
     case "float32":
       return {

@@ -92,7 +92,7 @@ export function toFrozenExpression(arg: ToFrozenExpressionArg): string {
     primitive === "float64"
   ) {
     defaultValue = "0";
-  } else if (primitive === "int64" || primitive === "uint64") {
+  } else if (primitive === "int64" || primitive === "hash64") {
     defaultValue = "BigInt(0)";
   } else if (primitive === "timestamp") {
     defaultValue = "$.Timestamp.UNIX_EPOCH";
@@ -121,7 +121,7 @@ function canBeFalsy(type: ResolvedType): boolean {
     primitive === "bool" ||
     primitive === "int32" ||
     primitive === "int64" ||
-    primitive === "uint64" ||
+    primitive === "hash64" ||
     primitive === "float32" ||
     primitive === "float64" ||
     primitive === "string"
