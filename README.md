@@ -12,7 +12,7 @@ Generated code can run Node, Deno or in the browser.
 In your `skir.yml` file, add the following snippet under `generators`:
 ```yaml
   - mod: skir-typescript-gen
-    outDir: ./src/skirout
+    outDir: ./skirout
     config: {}
 ```
 
@@ -361,9 +361,11 @@ expect(tarzan).toMatch({
     },
   ],
   subscriptionStatus: {
-    kind: "trial",
-    value: {
-      startTime: Timestamp.fromUnixMillis(1234),
+    union: {
+      kind: "trial",
+      value: {
+        startTime: Timestamp.fromUnixMillis(1234),
+      },
     },
   },
   // `userId` is not specified so it can be anything
