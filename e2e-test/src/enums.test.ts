@@ -11,7 +11,7 @@ describe("simple enum", () => {
   describe("#create", () => {
     it("unknown field", () => {
       JsonValue.create({ kind: "boolean", value: true });
-      expect(Weekday.create("?")).toBe(Weekday.UNKNOWN);
+      expect(Weekday.create("UNKNOWN")).toBe(Weekday.UNKNOWN);
     });
 
     it("constant name", () => {
@@ -28,7 +28,7 @@ describe("simple enum", () => {
       expect(monday.union.kind).toBe("MONDAY");
     });
     it("#UNKNOWN", () => {
-      expect(Weekday.UNKNOWN.union.kind).toBe("?");
+      expect(Weekday.UNKNOWN.union.kind).toBe("UNKNOWN");
     });
   });
 
@@ -144,7 +144,7 @@ describe("simple enum", () => {
     const serializerTester = new SerializerTester(Weekday.serializer);
     serializerTester.reserializeAndAssert(Weekday.UNKNOWN, {
       denseJson: 0,
-      readableJson: "?",
+      readableJson: "UNKNOWN",
       bytesAsBase16: "00",
     });
     serializerTester.reserializeAndAssert(monday, {
@@ -167,7 +167,7 @@ describe("simple enum", () => {
     const _: Weekday.Kind = "MONDAY";
   }
   {
-    const _: Weekday.Kind = "?";
+    const _: Weekday.Kind = "UNKNOWN";
   }
 });
 
@@ -269,7 +269,7 @@ describe("recursive enum", () => {
   it("switch", () => {
     const arrayLength = (() => {
       switch (complexValue.union.kind) {
-        case "?":
+        case "UNKNOWN":
           return -1;
         case "array":
           return complexValue.union.value.length;
@@ -362,7 +362,8 @@ describe("enum reflection", () => {
     const nullField: EnumVariant<JsonValue> = typeDescriptor.getVariant("NULL");
     const arrayField: EnumVariant<JsonValue> =
       typeDescriptor.getVariant("array");
-    const unknownField: EnumVariant<JsonValue> = typeDescriptor.getVariant("?");
+    const unknownField: EnumVariant<JsonValue> =
+      typeDescriptor.getVariant("UNKNOWN");
 
     it("#1", () => {
       expect(nullField).toBe(typeDescriptor.getVariant(1)!);
@@ -387,7 +388,7 @@ describe("enum reflection", () => {
       expect(arrayField.number).toBe(4);
     });
     it("#8", () => {
-      expect(unknownField.name).toBe("?");
+      expect(unknownField.name).toBe("UNKNOWN");
     });
     it("#9", () => {
       expect(unknownField.number).toBe(0);

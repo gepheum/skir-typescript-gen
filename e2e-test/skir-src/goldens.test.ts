@@ -117,7 +117,7 @@ function verifyAssertion(assertion: Assertion): void {
     case "reserialize_large_array": {
       return reserializeLargeArrayAndVerify(assertion.union.value);
     }
-    case "?":
+    case "UNKNOWN":
       throw new Error();
     default: {
       const _: never = assertion.union;
@@ -484,7 +484,7 @@ function evaluateBytes(expr: BytesExpression): skir.ByteString {
       const literal = evaluteTypedValue(expr.union.value);
       return toBytes(literal.serializer, literal.value);
     }
-    case "?":
+    case "UNKNOWN":
       throw new Error();
   }
 }
@@ -501,7 +501,7 @@ function evaluateString(expr: StringExpression): string {
       const literal = evaluteTypedValue(expr.union.value);
       return toReadableJson(literal.serializer, literal.value);
     }
-    case "?":
+    case "UNKNOWN":
       throw new Error();
   }
 }
@@ -731,7 +731,7 @@ function evaluteTypedValue<T>(literal: TypedValue): TypedValueType<unknown> {
         ),
         serializer: MyEnum.serializer,
       };
-    case "?":
+    case "UNKNOWN":
       throw new Error();
   }
 }

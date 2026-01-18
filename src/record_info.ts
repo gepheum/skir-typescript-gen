@@ -290,8 +290,8 @@ class RecordInfoCreator {
     // Register the special UNKNOWN variant.
     registerConstantVariants({
       isConstant: true,
-      name: "?",
-      quotedName: '"?"',
+      name: "UNKNOWN",
+      quotedName: '"UNKNOWN"',
       property: "UNKNOWN",
       number: 0,
       doc: { text: "", pieces: [] },
