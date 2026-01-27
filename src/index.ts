@@ -795,7 +795,7 @@ class TsModuleCodeGenerator {
       .replace(/^\s*\n+/g, "")
       .replace(/\n+\s*$/g, "")
       .replace(/\n{3,}/g, "\n\n")
-      .replace("*/", "* /");
+      .replace(/\*\//g, "* /");
 
     if (text.length <= 0) {
       return;
