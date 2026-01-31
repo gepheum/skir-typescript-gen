@@ -12,7 +12,7 @@ import {
   StringExpression,
   TypedValue,
   UNIT_TESTS,
-} from "../skirout/goldens.js";
+} from "../skirout/@gepheum/skir-golden-tests/goldens.js";
 
 class AssertionError {
   message = "";
