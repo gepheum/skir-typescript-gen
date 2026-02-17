@@ -16,6 +16,12 @@ In your `skir.yml` file, add the following snippet under `generators`:
     config: {}
 ```
 
+The generated TypeScript code has a runtime dependency on the `skir_client` library. Install it with:
+
+```shell
+npm i skir-client
+```
+
 For more information, see this TypeScript project [example](https://github.com/gepheum/skir-typescript-example).
 
 ## TypeScript generated code guide
