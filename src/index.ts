@@ -576,13 +576,13 @@ class TsModuleCodeGenerator {
       const reqSerializer = this.getSerializerExpr(requestType!);
       const respSerializer = this.getSerializerExpr(responseType!);
       this.push(`
-        export const ${varName} = /*@__PURE__*/ {
+        export const ${varName} = /*@__PURE__*/ (() => ({
           name: "${name}",
           number: ${number},
           requestSerializer: ${reqSerializer},
           responseSerializer: ${respSerializer},
           doc: ${JSON.stringify(doc.text)},
-        };\n\n`);
+      }))();\n\n`);
     }
   }
 
