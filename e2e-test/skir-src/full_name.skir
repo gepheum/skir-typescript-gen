@@ -1,4 +1,4 @@
-import BigInt from "./structs.skir";
+import { BigInt } from "structs.skir";
 
 /// The full name.
 struct FullName {
