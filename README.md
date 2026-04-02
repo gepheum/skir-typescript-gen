@@ -378,11 +378,11 @@ console.log(TARZAN);
 
 ### Skir services
 
-#### Starting a skir service on an HTTP server
+#### Starting a SkirRPC service on an HTTP server
 
 Full example [here](https://github.com/gepheum/skir-typescript-example/blob/main/src/server.ts).
 
-#### Sending RPCs to a skir service
+#### Sending RPCs to a SkirRPC service
 
 Full example [here](https://github.com/gepheum/skir-typescript-example/blob/main/src/client.ts).
 
