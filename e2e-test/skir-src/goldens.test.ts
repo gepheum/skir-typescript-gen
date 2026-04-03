@@ -119,31 +119,85 @@ function verifyAssertion(assertion: Assertion): void {
     case "reserialize_large_array": {
       return reserializeLargeArrayAndVerify(assertion.union.value);
     }
-    case "is_constant_a": {
-      const actual = evaluteTypedValue(assertion.union.value.actual).value as {
-        union?: { kind?: string };
-      };
-      if (actual.union?.kind !== "A") {
+    case "enum_a_from_json_is_constant": {
+      const value = assertion.union.value.keepUnrecognized
+        ? fromJsonKeepUnrecognized(
+            EnumA.serializer,
+            evaluateString(assertion.union.value.actual),
+          )
+        : fromJsonDropUnrecognized(
+            EnumA.serializer,
+            evaluateString(assertion.union.value.actual),
+          );
+      if (value.union.kind !== "A") {
         throw new AssertionError({
-          actual: actual.union?.kind,
+          actual: value.union.kind,
           expected: "A",
         });
       }
       break;
     }
-    case "is_wrapper_b": {
-      const actual = evaluteTypedValue(assertion.union.value.actual).value as {
-        union?: { kind?: string; value?: unknown };
-      };
-      if (actual.union?.kind !== "b") {
+    case "enum_a_from_bytes_is_constant": {
+      const value = assertion.union.value.keepUnrecognized
+        ? fromBytesKeepUnrecognized(
+            EnumA.serializer,
+            evaluateBytes(assertion.union.value.actual),
+          )
+        : fromBytesDropUnrecognizedFields(
+            EnumA.serializer,
+            evaluateBytes(assertion.union.value.actual),
+          );
+      if (value.union.kind !== "A") {
         throw new AssertionError({
-          actual: actual.union?.kind,
+          actual: value.union.kind,
+          expected: "A",
+        });
+      }
+      break;
+    }
+    case "enum_b_from_json_is_wrapper_b": {
+      const value = assertion.union.value.keepUnrecognized
+        ? fromJsonKeepUnrecognized(
+            EnumB.serializer,
+            evaluateString(assertion.union.value.actual),
+          )
+        : fromJsonDropUnrecognized(
+            EnumB.serializer,
+            evaluateString(assertion.union.value.actual),
+          );
+      if (value.union.kind !== "b") {
+        throw new AssertionError({
+          actual: value.union.kind,
           expected: "b",
         });
       }
-      if (actual.union.value !== assertion.union.value.expected) {
+      if (value.union.value !== assertion.union.value.expected) {
         throw new AssertionError({
-          actual: actual.union.value,
+          actual: value.union.value,
+          expected: assertion.union.value.expected,
+        });
+      }
+      break;
+    }
+    case "enum_b_from_bytes_is_wrapper_b": {
+      const value = assertion.union.value.keepUnrecognized
+        ? fromBytesKeepUnrecognized(
+            EnumB.serializer,
+            evaluateBytes(assertion.union.value.actual),
+          )
+        : fromBytesDropUnrecognizedFields(
+            EnumB.serializer,
+            evaluateBytes(assertion.union.value.actual),
+          );
+      if (value.union.kind !== "b") {
+        throw new AssertionError({
+          actual: value.union.kind,
+          expected: "b",
+        });
+      }
+      if (value.union.value !== assertion.union.value.expected) {
+        throw new AssertionError({
+          actual: value.union.value,
           expected: assertion.union.value.expected,
         });
       }
