@@ -4,6 +4,8 @@ import {
   Assertion,
   BytesExpression,
   Color,
+  EnumA,
+  EnumB,
   KeyedArrays,
   MyEnum,
   Point,
@@ -117,12 +119,38 @@ function verifyAssertion(assertion: Assertion): void {
     case "reserialize_large_array": {
       return reserializeLargeArrayAndVerify(assertion.union.value);
     }
+    case "is_constant_a": {
+      const actual = evaluteTypedValue(assertion.union.value.actual).value as {
+        union?: { kind?: string };
+      };
+      if (actual.union?.kind !== "A") {
+        throw new AssertionError({
+          actual: actual.union?.kind,
+          expected: "A",
+        });
+      }
+      break;
+    }
+    case "is_wrapper_b": {
+      const actual = evaluteTypedValue(assertion.union.value.actual).value as {
+        union?: { kind?: string; value?: unknown };
+      };
+      if (actual.union?.kind !== "b") {
+        throw new AssertionError({
+          actual: actual.union?.kind,
+          expected: "b",
+        });
+      }
+      if (actual.union.value !== assertion.union.value.expected) {
+        throw new AssertionError({
+          actual: actual.union.value,
+          expected: assertion.union.value.expected,
+        });
+      }
+      break;
+    }
     case "UNKNOWN":
       throw new Error();
-    default: {
-      const _: never = assertion.union;
-      throw new Error(`Unhandled assertion kind: ${_}`);
-    }
   }
 }
 
@@ -587,6 +615,18 @@ function evaluteTypedValue<T>(literal: TypedValue): TypedValueType<unknown> {
         serializer: MyEnum.serializer,
       };
     }
+    case "enum_a": {
+      return {
+        value: literal.union.value,
+        serializer: EnumA.serializer,
+      };
+    }
+    case "enum_b": {
+      return {
+        value: literal.union.value,
+        serializer: EnumB.serializer,
+      };
+    }
     case "keyed_arrays": {
       return {
         value: literal.union.value,
@@ -730,6 +770,70 @@ function evaluteTypedValue<T>(literal: TypedValue): TypedValueType<unknown> {
           evaluateBytes(literal.union.value),
         ),
         serializer: MyEnum.serializer,
+      };
+    case "enum_a_from_json_keep_unrecognized":
+      return {
+        value: fromJsonKeepUnrecognized(
+          EnumA.serializer,
+          evaluateString(literal.union.value),
+        ),
+        serializer: EnumA.serializer,
+      };
+    case "enum_a_from_json_drop_unrecognized":
+      return {
+        value: fromJsonDropUnrecognized(
+          EnumA.serializer,
+          evaluateString(literal.union.value),
+        ),
+        serializer: EnumA.serializer,
+      };
+    case "enum_a_from_bytes_keep_unrecognized":
+      return {
+        value: fromBytesKeepUnrecognized(
+          EnumA.serializer,
+          evaluateBytes(literal.union.value),
+        ),
+        serializer: EnumA.serializer,
+      };
+    case "enum_a_from_bytes_drop_unrecognized":
+      return {
+        value: fromBytesDropUnrecognizedFields(
+          EnumA.serializer,
+          evaluateBytes(literal.union.value),
+        ),
+        serializer: EnumA.serializer,
+      };
+    case "enum_b_from_json_keep_unrecognized":
+      return {
+        value: fromJsonKeepUnrecognized(
+          EnumB.serializer,
+          evaluateString(literal.union.value),
+        ),
+        serializer: EnumB.serializer,
+      };
+    case "enum_b_from_json_drop_unrecognized":
+      return {
+        value: fromJsonDropUnrecognized(
+          EnumB.serializer,
+          evaluateString(literal.union.value),
+        ),
+        serializer: EnumB.serializer,
+      };
+    case "enum_b_from_bytes_keep_unrecognized":
+      return {
+        value: fromBytesKeepUnrecognized(
+          EnumB.serializer,
+          evaluateBytes(literal.union.value),
+        ),
+        serializer: EnumB.serializer,
+      };
+    case "enum_b_from_bytes_drop_unrecognized":
+      return {
+        value: fromBytesDropUnrecognizedFields(
+          EnumB.serializer,
+          evaluateBytes(literal.union.value),
+        ),
+        serializer: EnumB.serializer,
       };
     case "UNKNOWN":
       throw new Error();
