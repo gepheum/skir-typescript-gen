@@ -347,7 +347,7 @@ class RecordInfoCreator {
   }
 
   private createEnumConstantVariant(variant: Field): EnumConstantVariant {
-    const name = variant.name.text;
+    const name = convertCase(variant.name.text, "UPPER_UNDERSCORE");
     const quotedName = `"${name}"`;
     const property = getEnumVariantProperty(name);
     return {
