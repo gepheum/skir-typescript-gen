@@ -49,7 +49,7 @@ describe("simple enum", () => {
             id: "enums.skir:JsonValue",
             variants: [
               {
-                name: "NULL",
+                name: "null",
                 number: 1,
               },
               {
@@ -144,23 +144,23 @@ describe("simple enum", () => {
     const serializerTester = new SerializerTester(Weekday.serializer);
     serializerTester.reserializeAndAssert(Weekday.UNKNOWN, {
       denseJson: 0,
-      readableJson: "UNKNOWN",
+      readableJson: "unknown",
       bytesAsBase16: "00",
     });
     serializerTester.reserializeAndAssert(monday, {
       denseJson: 1,
-      readableJson: "MONDAY",
+      readableJson: "monday",
       bytesAsBase16: "01",
     });
     serializerTester.reserializeAndAssert(Weekday.TUESDAY, {
       denseJson: 2,
-      readableJson: "TUESDAY",
+      readableJson: "tuesday",
       bytesAsBase16: "02",
     });
   });
 
   describe("#toString", () => {
-    expect(Weekday.SATURDAY.toString()).toBe('"SATURDAY"');
+    expect(Weekday.SATURDAY.toString()).toBe('"saturday"');
   });
 
   {
@@ -221,7 +221,7 @@ describe("recursive enum", () => {
   const serializerTester = new SerializerTester(JsonValue.serializer);
   serializerTester.reserializeAndAssert(JsonValue.NULL, {
     denseJson: 1,
-    readableJson: "NULL",
+    readableJson: "null",
     bytesAsBase16: "01",
   });
   serializerTester.reserializeAndAssert(complexValue, {
@@ -229,12 +229,12 @@ describe("recursive enum", () => {
     readableJson: {
       kind: "array",
       value: [
-        "NULL",
+        "null",
         {
           kind: "boolean",
           value: true,
         },
-        "NULL",
+        "null",
         {
           kind: "object",
           value: [
@@ -286,12 +286,12 @@ describe("recursive enum", () => {
         "{",
         '  "kind": "array",',
         '  "value": [',
-        '    "NULL",',
+        '    "null",',
         "    {",
         '      "kind": "boolean",',
         '      "value": true',
         "    },",
-        '    "NULL",',
+        '    "null",',
         "    {",
         '      "kind": "object",',
         '      "value": [',

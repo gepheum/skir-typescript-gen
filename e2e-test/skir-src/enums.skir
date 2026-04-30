@@ -1,17 +1,17 @@
 /// A day of the week.
 enum Weekday {
-  MONDAY;
-  TUESDAY;
-  WEDNESDAY;
-  THURSDAY;
-  FRIDAY;
-  SATURDAY;
+  monday;
+  tuesday;
+  wednesday;
+  thursday;
+  friday;
+  saturday;
   /// Fun day
-  SUNDAY;
+  sunday;
 }
 
 enum JsonValue {
-  NULL = 1;
+  null = 1;
   /// true or
   /// false
   boolean: bool = 100;
@@ -28,5 +28,5 @@ enum JsonValue {
 enum EmptyEnum {}
 
 enum EnumWithNameConflict {
-  SERIALIZER;
+  serializer;
 }
