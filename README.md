@@ -154,9 +154,9 @@ greet(lylaMut);
 The definition of the `SubscriptionStatus` enum in the .skir file is:
 ```rust
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
